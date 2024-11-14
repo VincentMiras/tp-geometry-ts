@@ -6,9 +6,14 @@ export default class LineString implements Geometry{
 
     constructor(points?: Array<Point>) {
         this.points = points? points:[] ;
-      }
+    }
+    
     isEmpty(): boolean {
         return (this.points.length===0);
+    }
+
+    translate(dx: number, dy: number) {
+        this.points.forEach((point)=> point.translate(dx,dy));
     }
     
     getType(): string {
