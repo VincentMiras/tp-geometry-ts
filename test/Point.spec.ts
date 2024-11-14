@@ -24,5 +24,18 @@ describe("test Point", () => {
         expect(p).to.deep.equal(new Point([4.0,5.0]))
 
     });
+    it("test clone Point", () => {
+        const pvide = new Point();  
+        const pvclone=pvide.clone()
+        expect(pvclone).to.not.equal(pvide);
+
+        const pplein=new Point([3.0,4.0]);
+        const ppclone=pplein.clone()
+        expect(ppclone).to.deep.equal(pplein);
+        pplein.translate(1,1);
+        expect(ppclone).to.not.deep.equal(pplein);
+
+        
+    });
 });
 

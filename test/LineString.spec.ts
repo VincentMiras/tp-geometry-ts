@@ -26,5 +26,20 @@ describe("test Linestring", () => {
         expect(ls.isEmpty()).to.equal(false);
         ls.translate(1,1)
         expect(ls).to.deep.equal(new LineString([new Point([4.0,5.0]),new Point([6.0,8.5])]))
-    });    
+    });
+    it("test clone LineString", () => {
+        const lsvide = new LineString();  
+        const lsvclone=lsvide.clone()
+        expect(lsvclone).to.not.equal(lsvide);
+
+        const p1=new Point([3.0,4.0]);
+        const p2=new Point([5.0,7.5]);
+        const lsplein = new LineString([p1,p2]);
+        const lspclone=lsplein.clone()
+        expect(lspclone).to.deep.equal(lsplein);
+        lsplein.translate(1,1);
+        expect(lspclone).to.not.deep.equal(lsplein);
+
+        
+    });
 });

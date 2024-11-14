@@ -15,6 +15,16 @@ export default class LineString implements Geometry{
     translate(dx: number, dy: number) {
         this.points.forEach((point)=> point.translate(dx,dy));
     }
+
+    clone(): LineString{
+        if (!this.isEmpty()){
+            var lscopy=new LineString()
+            this.points.forEach(point => {lscopy.points.push(point.clone())  
+            });
+            return lscopy;
+        }
+        return new LineString();
+    }
     
     getType(): string {
         return "LineString";
