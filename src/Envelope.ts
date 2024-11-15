@@ -10,7 +10,7 @@ export default class Envelope{
     }
 
     isEmpty(): Boolean {
-        return this.bottomLeft.length === 0 && this.topRight.length === 0;
+        return (this.bottomLeft.length === 0 && this.topRight.length === 0);
     }
 
     getXmin():number{

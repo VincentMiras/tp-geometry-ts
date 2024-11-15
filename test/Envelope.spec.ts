@@ -2,7 +2,7 @@ import "mocha";
 import { expect } from "chai";
 import Envelope from "../src/Envelope"
 
-describe("test Linestring", () => {
+describe("test Envelope", () => {
     it("test default constructor", () => {
         const e=new Envelope();
         expect(e.isEmpty()).to.equal(true);

@@ -1,26 +1,41 @@
-import Envelope from "./Envelope";
-import Point from "./Point";
 import Coordinate from "./Coordinate";
+import Envelope from "./Envelope";
 
-export default class EnvelopeBuilder{
-    private listpoint?:Array<Point>;
-    private bottomLeft?:Coordinate;
-    private topRight?:Coordinate;
+export default class EnvelopeBuilder {
+    private xmin: number;
+    private ymin: number;
+    private xmax: number;
+    private ymax: number;
 
-    insert(point:Point):void{
-        this.listpoint.push(point);
+    constructor() {
+        this.xmin = Number.NaN;
+        this.ymin = Number.NaN;
+        this.xmax = Number.NaN;
+        this.ymax = Number.NaN;
     }
 
-    build():Envelope{
-        this.bottomLeft=this.listpoint[0].getCoordinate();
-        this.topRight=this.listpoint[0].getCoordinate();
-        this.listpoint.forEach(point => {
-            this.bottomLeft[0]=Math.min(point[0],this.bottomLeft[0])
-            this.bottomLeft[1]=Math.min(point[1],this.bottomLeft[1])
-            this.topRight[0]=Math.max(point[0],this.topRight[0])
-            this.topRight[0]=Math.max(point[1],this.topRight[0])
-        });
-        return new Envelope(this.bottomLeft,this.topRight);
+    insert(coordinate: Coordinate) {
+        if (Number.isNaN(this.xmin)) {
+            this.xmin = coordinate[0];
+            this.xmax = coordinate[0];
+            this.ymin = coordinate[1];
+            this.ymax = coordinate[1];
+        } else {
+            if (this.xmin>coordinate[0]) {
+                this.xmin = coordinate[0];
+            } else if (this.xmax<coordinate[0]) {
+                this.xmax = coordinate[0];
+            }
+
+            if (this.ymin>coordinate[1]) {
+                this.ymin = coordinate[1];
+            } else if (this.ymax<coordinate[1]) {
+                this.ymax = coordinate[1];
+            }
+        }  
     }
 
+    build(): Envelope {
+        return new Envelope([this.xmin,this.ymin],[this.xmax,this.ymax]);
+    }
 }
