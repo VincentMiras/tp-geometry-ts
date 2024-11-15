@@ -2,6 +2,7 @@ import Coordinate from "./Coordinate";
 import Envelope from "./Envelope";
 import EnvelopeBuilder from "./EnvelopeBuilder";
 import Geometry from "./Geometry";
+import GeometryVisitor from "./GeometryVisitor";
 
 export default class Point implements Geometry{
   private coordinate?: Coordinate;
@@ -50,6 +51,10 @@ export default class Point implements Geometry{
 
   y(): number {
     return this.coordinate[1] ? this.coordinate[1] : Number.NaN ;
+  }
+
+  accept(visitor: GeometryVisitor): void {
+    visitor.visitPoint(this);
   }
 
 }

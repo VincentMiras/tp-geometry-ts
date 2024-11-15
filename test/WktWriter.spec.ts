@@ -6,7 +6,7 @@ import LineString from "../src/LineString";
 import WktWriter from "../src/WktWriter"
 
 describe("test WktWriter", () => {
-    it("test default constructor", () => {
+    it("test complet", () => {
         const pv=new Point()
         const pp=new Point([0,1])
         const pp2=new Point([1,2])
