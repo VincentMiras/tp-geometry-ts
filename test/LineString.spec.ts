@@ -2,6 +2,7 @@ import "mocha";
 import { expect } from "chai";
 import LineString from "../src/LineString"
 import Point from "../src/Point"
+import Envelope from "../src/Envelope";
 
 describe("test Linestring", () => {
     it("test default constructor", () => {
@@ -41,5 +42,11 @@ describe("test Linestring", () => {
         expect(lspclone).to.not.deep.equal(lsplein);
 
         
+    });
+    it("test Envelope LineString", () => {
+        const p1=new Point([3.0,4.0]);
+        const p2=new Point([5.0,7.5]);
+        const lsplein = new LineString([p1,p2]);
+        expect(lsplein.getEnvelope()).to.deep.equal(new Envelope([3,4],[5,7.5]))       
     });
 });
