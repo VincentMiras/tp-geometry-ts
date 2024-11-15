@@ -15,17 +15,17 @@ describe("test WktVisitor", () => {
 
     it("test accept", () => {
         pEmpty.accept(visitor);
-        var wkt=visitor.getResults();
-        expect(wkt).to.equal("Je suis un point vide.")
+        var wkt=visitor.getResult();
+        expect(wkt).to.equal("POINT EMPTY")
         p1.accept(visitor);
-        var wkt=visitor.getResults();
-        expect(wkt).to.equal("Je suis un point avec x=3 et y=4.")
+        var wkt=visitor.getResult();
+        expect(wkt).to.equal("POINT(3 4)")
         pointsEmpty.accept(visitor);
-        var wkt=visitor.getResults();
-        expect(wkt).to.equal("Je suis une polyligne vide.")
+        var wkt=visitor.getResult();
+        expect(wkt).to.equal("LINESTRING EMPTY")
         points.accept(visitor);
-        var wkt=visitor.getResults();
-        expect(wkt).to.equal("Je suis une polyligne définie par 2 point(s).")
+        var wkt=visitor.getResult();
+        expect(wkt).to.equal("LINESTRING(3 4,2 5)")
     });
 
 });

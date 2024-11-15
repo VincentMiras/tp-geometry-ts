@@ -5,23 +5,30 @@ import Point from "./Point";
 export default class WktVisitor implements GeometryVisitor{
     private buffer:String;
 
-    visitPoint(point:Point){
-        if (point.isEmpty()){
-            this.buffer="Je suis un point vide.";
-        }else{
-            this.buffer="Je suis un point avec x="+point.x()+" et y="+point.y()+".";
+    visitPoint(point: Point): void {
+        if (point.isEmpty()) {
+            this.buffer = "POINT EMPTY";
+        } else {
+            this.buffer = "POINT(" + point.x() + " " + point.y() +")";
         }
     }
 
-    visitLineString(linestring:LineString){
-        if (linestring.isEmpty()){
-            this.buffer="Je suis une polyligne vide.";
-        }else{
-            this.buffer="Je suis une polyligne définie par "+linestring.getNumPoints()+" point(s)."
-        }
+    visitLineString(points: LineString): void {
+        if (points.isEmpty()) {
+            this.buffer = "LINESTRING EMPTY"
+        } else {
+            let wktlinestring = "LINESTRING(";
+            for (let index = 0; index < points.getNumPoints(); index++) {
+                wktlinestring += points.getPointN(index).x();
+                wktlinestring += " ";
+                wktlinestring += points.getPointN(index).y();
+                wktlinestring += ",";
+            }
+            this.buffer = wktlinestring.slice(0,-1) + ")";
+        };
     }
 
-    getResults():String{
+    getResult():String{
         return this.buffer
     }
     
